@@ -29,6 +29,7 @@ Route.group(() => {
   Route.post('/', 'MovieController.create');
   Route.get('/', 'MovieController.list');
   Route.get(':id', 'MovieController.show');
+  Route.put(':id', 'MovieController.update');
 })
   .middleware(["auth"])
   .prefix('/movies');

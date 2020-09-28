@@ -21,16 +21,35 @@ class MovieController {
 
     const total = count[0]['count(*)']
 
-    
-    const data = {total: total, data: movies}
+
+    const data = { total: total, data: movies }
     return data
   }
   async show({ response, params }) {
     const movie = await Movie.query().where('id', params.id).first()
 
-    if(!movie){
-      return response.status(401).send({message: 'Movie not found'})
+    if (!movie) {
+      return response.status(401).send({ message: 'Movie not found' })
     }
+
+    return movie
+  }
+
+  async update({ request, response, params }) {
+    const { name, description, year, genre } = request.all()
+
+    const movie = await Movie.query().where('id', params.id).first()
+
+    if (!movie) {
+      return response.status(401).send({ message: 'Movie not found' })
+    }
+
+    movie.name = name
+    movie.description = description
+    movie.year = year
+    movie.genre - genre
+
+    await movie.save()
 
     return movie
   }
