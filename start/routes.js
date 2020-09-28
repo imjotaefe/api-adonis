@@ -16,4 +16,11 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('welcome')
+
+Route.get('/', () => { return "API rodando"});
+
+Route.post('/user', 'UserController.create');
+
+Route.post('/login', 'UserController.login');
+
+
