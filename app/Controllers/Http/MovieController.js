@@ -53,6 +53,15 @@ class MovieController {
 
     return movie
   }
+
+  async delete({params, response, auth}){
+    const movie = await Movie.query().where('id', params.id).first()
+    if (!movie) {
+      return response.status(401).send({ message: 'Movie not found' })
+    }
+    await movie.delete()
+    return response.status(200).send({message: 'The movie was deleted'})
+  }
 }
 
 module.exports = MovieController

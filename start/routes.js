@@ -30,6 +30,7 @@ Route.group(() => {
   Route.get('/', 'MovieController.list');
   Route.get(':id', 'MovieController.show');
   Route.put(':id', 'MovieController.update');
+  Route.delete(':id', 'MovieController.delete');
 })
   .middleware(["auth"])
   .prefix('/movies');
