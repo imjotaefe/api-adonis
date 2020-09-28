@@ -35,8 +35,8 @@ class UserController {
   async login ({request, response, auth}){
     try{
       const {email, password} = request.all();
-      
-      const validateToken = await auth.attempt(email,password)
+
+      const validateToken = await auth.withRefreshToken().attempt(email,password)
 
       return validateToken
   

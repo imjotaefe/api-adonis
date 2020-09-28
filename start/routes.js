@@ -17,10 +17,18 @@
 const Route = use('Route')
 
 
-Route.get('/', () => { return "API rodando"});
+Route.get('/', () => { return "API ok"});
 
 Route.post('/user', 'UserController.create');
 
 Route.post('/login', 'UserController.login');
 
 
+
+Route.group(() => {
+  Route.post('/', 'MovieController.create');
+  Route.get('/', 'MovieController.list');
+  Route.get(':id', 'MovieController.show');
+})
+  .middleware(["auth"])
+  .prefix('/movies');
