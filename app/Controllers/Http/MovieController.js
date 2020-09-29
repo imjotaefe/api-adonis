@@ -15,12 +15,13 @@ class MovieController {
       return response.status(501).send({ error: `Erro: ${err}` })
     }
   }
-  async list() {
-    const movies = await Movie.all()
+  async list({request}) {
+    const movies = await Movie.query()
+    .filter(request.all())
+    .fetch()
     const count = await Database.from('movies').count()                                         // returns array
 
     const total = count[0]['count(*)']
-
 
     const data = { total: total, data: movies }
     return data
